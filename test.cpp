@@ -1,10 +1,10 @@
 #include <iostream>
+#include "test.h"
 
+extern const int bufSize = 0;
 int main(int argc, char const *argv[])
 {
-    /* code */
-    unsigned char c1 = -1;
-    signed char c2 = 256;
-    
+    int *p1;
+    const int *p2 = 0;
     return 0;
 }
