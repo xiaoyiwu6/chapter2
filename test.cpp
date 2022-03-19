@@ -1,10 +1,24 @@
 #include <iostream>
-#include "test.h"
+#include <cctype>
+#include <vector>
 
-extern const int bufSize = 0;
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+using std::vector;
+
 int main(int argc, char const *argv[])
 {
-    int *p1;
-    const int *p2 = 0;
+    vector<int> ivec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    for (auto &i : ivec)
+        i *= i;
+
+    for (auto i : ivec)
+        cout << i << endl;
+
+    //    for (decltype(ivec.size()) index = 0; index < ivec.size(); index++)
+    //        cout << ivec[index] << endl;
     return 0;
 }
