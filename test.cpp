@@ -11,6 +11,9 @@ using std::vector;
 int main(int argc, char const *argv[])
 {
     vector<int> ivec{1, 2, 3, 4, 5, 6, 7, 8, 9};
+    decltype(ivec.size()) size_ivec = 0;
+    vector<int>::size_type size_ivec2 = 0;
+    auto size_ivec3 = ivec.size();
 
     for (auto &i : ivec)
         i *= i;
