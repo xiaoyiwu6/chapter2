@@ -1,29 +1,22 @@
 #include <iostream>
 #include <vector>
 #include <cctype>
+#include <stdexcept>
+#include "Chapter6.h"
 
+using std::begin;
+using std::cerr;
 using std::cin;
 using std::cout;
+using std::domain_error;
+using std::end;
 using std::endl;
 using std::string;
 using std::vector;
 
 int main(int argc, char const *argv[])
 {
-    vector<int> ivec{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    auto beg = ivec.begin(), end = ivec.end();
-    auto mid = ivec.begin() + (end - beg) / 2;
-    int sought;
-    cin>>sought;
-    while (mid != end && *mid != sought)
-    {
-        if (sought < *mid)
-            end = mid;
-        else
-            beg = mid + 1;
-        mid = beg + (end - beg) / 2;
-    }
-    cout << *mid << endl;
+    cout << sum({1, 2, 3, 4, 5, 6, 7, 8, 9, 10}) << endl;
 
     return 0;
 }

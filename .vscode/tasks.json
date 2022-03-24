@@ -9,6 +9,7 @@
 				"-fdiagnostics-color=always",
 				"-g",
 				"${file}",
+				"Chapter6.cpp",
 				"-o",
 				"${fileDirname}\\${fileBasenameNoExtension}.exe"
 			],
