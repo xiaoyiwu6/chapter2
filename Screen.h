@@ -5,7 +5,7 @@
 
 class Screen
 {
-    friend class Window_mgr; 
+    friend class Window_mgr;
 
 public:
     typedef std::string::size_type pos;
@@ -29,6 +29,7 @@ public:
         do_display(os);
         return *this;
     }
+    pos size() const;
 
 private:
     pos cursor = 0;
@@ -63,6 +64,11 @@ Screen &Screen::set(pos r, pos col, char ch)
 {
     contents[r * width + col] = ch;
     return *this;
+}
+
+Screen::pos Screen::size() const
+{
+    return height * width;
 }
 
 #endif
