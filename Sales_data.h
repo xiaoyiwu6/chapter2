@@ -43,13 +43,17 @@ public:
 	// constructors
 	Sales_data(const std::string &s, unsigned n, double p) : bookNo(s), units_sold(n), revenue(p * n) {std::cout<<"受委托构造函数"<<std::endl;}
 	Sales_data() : Sales_data("", 0, 0) {std::cout<<"默认构造函数"<<std::endl;}
-	Sales_data(std::string s) : Sales_data(s, 0, 0) {std::cout<<"只接受string作为实参的构造函数"<<std::endl;}
-	Sales_data(std::istream &is) : Sales_data() { read(is, *this); std::cout<<"接受输入流作为实参的构造函数"<<std::endl; }
+	explicit Sales_data(std::string s) : Sales_data(s, 0, 0) {std::cout<<"只接受string作为实参的构造函数"<<std::endl;}
+	explicit Sales_data(std::istream &is) : Sales_data() { read(is, *this); std::cout<<"接受输入流作为实参的构造函数"<<std::endl; }
 
 	// operations on Sales_data objects
 	std::string isbn() const { return bookNo; }
 	Sales_data &combine(const Sales_data &);
-	double avg_price() const;
+	double avg_price() const{
+		if(units_sold)
+			return revenue/units_sold;
+		return 0.;
+	}
 
 private:
 	std::string bookNo;
