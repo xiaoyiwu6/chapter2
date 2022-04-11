@@ -21,18 +21,24 @@ using std::vector;
 
 int main(int argc, char const *argv[])
 {
-    forward_list<int> i_fl{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    auto prev = i_fl.before_begin(),
-         curr = i_fl.begin();
-
-    while (curr != i_fl.end())
-        if (*curr & 1)
-            curr = i_fl.erase_after(prev);
-        else
+    vector<int> iv{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    vector<int>::size_type min_len = iv.size() / 2;
+    vector<int>::iterator iter = iv.begin(),
+                          mid = iv.begin() + min_len;
+    vector<int>::difference_type count = 0;
+    while (iter != mid)
+    {
+        if (*iter == 2)
         {
-            prev = curr;
-            ++curr;
+            ++count;
+            iter = iv.insert(iter, 2 * 2);
+            ++iter;
+            mid = iv.begin() + min_len + count;
         }
+        ++iter;
+    }
+    for (int i : iv)
+        cout << i << endl;
 
     return 0;
 }
