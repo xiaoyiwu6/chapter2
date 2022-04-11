@@ -4,7 +4,7 @@ std::istream &process_input(std::istream &is)
 {
     std::string str;
     std::string temp;
-    while (!is.eof())
+    while (is)
     {
         is >> temp;
         str += temp;

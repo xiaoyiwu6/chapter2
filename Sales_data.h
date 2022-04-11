@@ -41,8 +41,8 @@ class Sales_data
 
 public:
 	// constructors
-	Sales_data(const std::string &s, unsigned n, double p) : bookNo(s), units_sold(n), revenue(p * n) {std::cout<<"受委托构造函数"<<std::endl;}
-	Sales_data() : Sales_data("", 0, 0) {std::cout<<"默认构造函数"<<std::endl;}
+	explicit Sales_data(const std::string &s, unsigned n, double p) : bookNo(s), units_sold(n), revenue(p * n) {std::cout<<"受委托构造函数"<<std::endl;}
+	explicit Sales_data() : Sales_data("", 0, 0) {std::cout<<"默认构造函数"<<std::endl;}
 	explicit Sales_data(std::string s) : Sales_data(s, 0, 0) {std::cout<<"只接受string作为实参的构造函数"<<std::endl;}
 	explicit Sales_data(std::istream &is) : Sales_data() { read(is, *this); std::cout<<"接受输入流作为实参的构造函数"<<std::endl; }
 
@@ -80,6 +80,14 @@ std::ostream &print(std::ostream &os, const Sales_data &item)
 	os<<item.bookNo<<" "<<item.units_sold<<" "
 	  <<item.revenue<<" "<<item.avg_price();
 	return os;
+}
+
+Sales_data &Sales_data::combine(const Sales_data &item)
+{
+	units_sold += item.units_sold;
+	revenue += item.revenue;
+
+	return *this;
 }
 
 // used in future chapters
