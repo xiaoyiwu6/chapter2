@@ -39,18 +39,20 @@ void InsertStr(forward_list<string> &slist, const string &A, const string &B)
 
 int main(int argc, char const *argv[])
 {
-    list<int> ivec{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    forward_list<int> ivec{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     auto iter = ivec.begin();
-    while (iter != ivec.end())
+    auto prev = ivec.before_begin();
+    auto end = ivec.end();
+    while (iter != end)
     {
         if (*iter & 1)
         {
-            iter = ivec.insert(iter, *iter);
-            iter++;
-            iter++;
+            iter = ivec.insert_after(prev, *iter);
+            iter++;iter++;
+            prev++;prev++;
         }
         else
-            iter = ivec.erase(iter);
+            iter = ivec.erase_after(prev);
     }
     for (int i : ivec)
         cout << i << endl;
