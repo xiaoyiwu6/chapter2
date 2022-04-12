@@ -39,22 +39,21 @@ void InsertStr(forward_list<string> &slist, const string &A, const string &B)
 
 int main(int argc, char const *argv[])
 {
-    forward_list<string> sflst = {"Hello", "!", "world", "!"};
-
-    InsertStr(sflst, "Hello", "你好");
-    for (auto curr = sflst.cbegin(); curr != sflst.cend(); ++curr)
-        cout << *curr << " ";
-    cout << endl;
-
-    InsertStr(sflst, "!", "?");
-    for (auto curr = sflst.cbegin(); curr != sflst.cend(); ++curr)
-        cout << *curr << " ";
-    cout << endl;
-
-    InsertStr(sflst, "Bye", "再见");
-    for (auto curr = sflst.cbegin(); curr != sflst.cend(); ++curr)
-        cout << *curr << " ";
-    cout << endl;
+    list<int> ivec{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    auto iter = ivec.begin();
+    while (iter != ivec.end())
+    {
+        if (*iter & 1)
+        {
+            iter = ivec.insert(iter, *iter);
+            iter++;
+            iter++;
+        }
+        else
+            iter = ivec.erase(iter);
+    }
+    for (int i : ivec)
+        cout << i << endl;
 
     return 0;
 }
