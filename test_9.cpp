@@ -95,18 +95,55 @@ void SubAbbr2(string &s, string oldVal, string newVal)
     }
 }
 
+void Decorate(string &s, string prefix, string suffix)
+{
+    s.insert(s.begin(), 1, ' ');
+    s.insert(s.begin(), prefix.begin(), prefix.end());
+    s.append(" ");
+    s.append(suffix);
+}
+
+void Decorate2(string &s, string prefix, string suffix)
+{
+    s.insert(0, 1, ' ');
+    s.insert(0, prefix);
+    s.insert(s.size(), 1, ' ');
+    s.insert(s.size(), suffix);
+}
+
+void SplitChar(const string &s)
+{
+    string::size_type pos = 0;
+    string decimal("0123456789");
+    string alphabet("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    while ((pos = s.find_first_of(decimal, pos)) != string::npos)
+        cout << s[pos++] << " ";
+    cout << endl;
+    pos = 0;
+    while ((pos = s.find_first_of(alphabet, pos)) != string::npos)
+        cout << s[pos++] << " ";
+    cout << endl;
+}
+
+void SplitChar2(const string &s)
+{
+    string::size_type pos = 0;
+    string decimal("0123456789");
+    string alphabet("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    while ((pos = s.find_first_not_of(alphabet, pos)) != string::npos)
+        cout << s[pos++] << " ";
+    cout << endl;
+    pos = 0;
+    while ((pos = s.find_first_not_of(decimal, pos)) != string::npos)
+        cout << s[pos++] << " ";
+    cout << endl;
+}
+
 int main(int argc, char const *argv[])
 {
 
-    string s = "tho thru tho!";
-    SubAbbr2(s, "thru", "through");
-    cout << s << endl;
-
-    SubAbbr2(s, "tho", "though");
-    cout << s << endl;
-
-    SubAbbr2(s, "through", "");
-    cout << s << endl;
+    string s = "ab2c3d7R4E6";
+    SplitChar2(s);
 
     return 0;
 }
