@@ -19,20 +19,42 @@ using std::list;
 using std::string;
 using std::vector;
 
+void InsertStr(forward_list<string> &slist, const string &A, const string &B)
+{
+    auto prev = slist.before_begin(),
+         curr = slist.begin();
+
+    while (curr != slist.end())
+    {
+        if (*curr == A)
+        {
+            slist.insert_after(curr, B);
+            return;
+        }
+        prev = curr;
+        ++curr;
+    }
+    slist.insert_after(prev, B);
+}
+
 int main(int argc, char const *argv[])
 {
-    forward_list<int> i_fl{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    auto prev = i_fl.before_begin(),
-         curr = i_fl.begin();
+    forward_list<string> sflst = {"Hello", "!", "world", "!"};
 
-    while (curr != i_fl.end())
-        if (*curr & 1)
-            curr = i_fl.erase_after(prev);
-        else
-        {
-            prev = curr;
-            ++curr;
-        }
+    InsertStr(sflst, "Hello", "你好");
+    for (auto curr = sflst.cbegin(); curr != sflst.cend(); ++curr)
+        cout << *curr << " ";
+    cout << endl;
+
+    InsertStr(sflst, "!", "?");
+    for (auto curr = sflst.cbegin(); curr != sflst.cend(); ++curr)
+        cout << *curr << " ";
+    cout << endl;
+
+    InsertStr(sflst, "Bye", "再见");
+    for (auto curr = sflst.cbegin(); curr != sflst.cend(); ++curr)
+        cout << *curr << " ";
+    cout << endl;
 
     return 0;
 }
