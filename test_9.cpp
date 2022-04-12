@@ -37,25 +37,48 @@ void InsertStr(forward_list<string> &slist, const string &A, const string &B)
     slist.insert_after(prev, B);
 }
 
-int main(int argc, char const *argv[])
+void SubAbbr(string &s, string oldVal, string newVal)
 {
-    forward_list<int> ivec{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-    auto iter = ivec.begin();
-    auto prev = ivec.before_begin();
-    auto end = ivec.end();
-    while (iter != end)
+    if (oldVal.empty())
+        return;
+    auto olen = oldVal.size();
+    auto nlen = newVal.size();
+    auto iter = s.begin();
+
+    while (iter <= s.end() - olen) //这里必须使用<=符号，!=号无法检查iter越过边界
     {
-        if (*iter & 1)
+        auto iter1 = iter;
+        auto iter2 = oldVal.begin();
+        //遍历对比oldVal
+        while (iter2 != oldVal.end() && *iter1 == *iter2)
         {
-            iter = ivec.insert_after(prev, *iter);
-            iter++;iter++;
-            prev++;prev++;
+            iter1++;
+            iter2++;
+        }
+        //中标
+        if (iter2 == oldVal.end())
+        {
+            iter = s.erase(iter, iter + olen);
+            iter = s.insert(iter, newVal.begin(), newVal.end());
+            iter += nlen; //指向下一个字符
         }
         else
-            iter = ivec.erase_after(prev);
+            iter++;
     }
-    for (int i : ivec)
-        cout << i << endl;
+}
+
+int main(int argc, char const *argv[])
+{
+
+    string s = "tho thru tho!";
+    SubAbbr(s, "thru", "through");
+    cout << s << endl;
+
+    SubAbbr(s, "tho", "though");
+    cout << s << endl;
+
+    SubAbbr(s, "through", "");
+    cout << s << endl;
 
     return 0;
 }
