@@ -67,17 +67,45 @@ void SubAbbr(string &s, string oldVal, string newVal)
     }
 }
 
+void SubAbbr2(string &s, string oldVal, string newVal)
+{
+    auto len = s.size(),
+         olen = oldVal.size(),
+         nlen = newVal.size();
+    size_t ix = 0;
+
+    if (oldVal.empty())
+        return;
+
+    while (ix <= len - olen)
+    {
+        size_t ix1 = ix,
+               ix2 = 0;
+        while (s[ix1] == oldVal[ix2] && ix2 < olen)
+        {
+            ix1++, ix2++;
+        }
+        if (ix2 == olen)
+        {
+            s = s.replace(ix, olen, newVal);
+            ix += nlen;
+        }
+        else
+            ix++;
+    }
+}
+
 int main(int argc, char const *argv[])
 {
 
     string s = "tho thru tho!";
-    SubAbbr(s, "thru", "through");
+    SubAbbr2(s, "thru", "through");
     cout << s << endl;
 
-    SubAbbr(s, "tho", "though");
+    SubAbbr2(s, "tho", "though");
     cout << s << endl;
 
-    SubAbbr(s, "through", "");
+    SubAbbr2(s, "through", "");
     cout << s << endl;
 
     return 0;
