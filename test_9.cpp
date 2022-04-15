@@ -10,6 +10,7 @@
 #include <iostream>
 #include <stack>
 #include <exception>
+#include "leetcode.h"
 
 using std::array;
 using std::cin;
@@ -26,8 +27,11 @@ using std::string;
 using std::vector;
 
 
+
 int main(int argc, char const *argv[])
 {
+    int max = lengthOfLongestSubstring("abc");
+    cout<< max <<endl;
 
     return 0;
 }
