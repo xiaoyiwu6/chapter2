@@ -5,3 +5,5 @@
 # vscode
 .vscode
 *.json
+.vscode/launch.json
+.vscode/tasks.com
